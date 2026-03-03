@@ -5,29 +5,35 @@ using System.Numerics;
 // The namespace your code is in.
 namespace MohawkGame2D
 {
-    /// <summary>
-    ///     Your game code goes inside this class!
-    /// </summary>
     public class Game
     {
         // Place your variables here:
+        Texture2D sword;
+        Texture2D heart;
+        Texture2D back;
 
-
-        /// <summary>
-        ///     Setup runs once before the game loop begins.
-        /// </summary>
         public void Setup()
         {
-
+            Window.SetTitle("Matching Game");
+            Window.SetSize(800, 600);
+            sword = Graphics.LoadTexture("C:/Users/lifew/source/repos/marshall-jordan-a3-2d-game/assets/graphics/sword.png");
+            heart = Graphics.LoadTexture("C:/Users/lifew/source/repos/marshall-jordan-a3-2d-game/assets/graphics/heart.png");
+            back = Graphics.LoadTexture("C:/Users/lifew/source/repos/marshall-jordan-a3-2d-game/assets/graphics/back.png");
         }
 
-        /// <summary>
-        ///     Update runs every frame.
-        /// </summary>
         public void Update()
         {
+            Window.ClearBackground(Color.OffWhite);
+            Draw(back, 300, 300);
+            if (Input.IsMouseButtonDown(0))
+            {
+                Draw(sword, 300, 300);
+            }
+        }
 
+        public void Draw(Texture2D graphic, float x, float y)
+        {
+            Graphics.Draw(graphic, x, y);
         }
     }
-
 }
