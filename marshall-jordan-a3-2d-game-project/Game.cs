@@ -16,9 +16,9 @@ namespace MohawkGame2D
         {
             Window.SetTitle("Matching Game");
             Window.SetSize(800, 600);
-            sword = Graphics.LoadTexture("C:/Users/lifew/source/repos/marshall-jordan-a3-2d-game/assets/graphics/sword.png");
-            heart = Graphics.LoadTexture("C:/Users/lifew/source/repos/marshall-jordan-a3-2d-game/assets/graphics/heart.png");
-            back = Graphics.LoadTexture("C:/Users/lifew/source/repos/marshall-jordan-a3-2d-game/assets/graphics/back.png");
+            sword = Graphics.LoadTexture("../../../../assets/graphics/sword.png");
+            heart = Graphics.LoadTexture("../../../../assets/graphics/heart.png");
+            back = Graphics.LoadTexture("../../../../assets/graphics/back.png");
         }
 
         public void Update()
