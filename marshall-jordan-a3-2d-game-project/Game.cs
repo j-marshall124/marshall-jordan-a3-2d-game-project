@@ -18,11 +18,11 @@ namespace MohawkGame2D
         {
             Window.SetTitle("Matching Game");
             Window.SetSize(800, 600);
-            sword = Graphics.LoadTexture("C:/Users/Jordan/source/repos/marshall-jordan-a3-2d-game-project/assets/graphics/sword01.png");
-            sword2 = Graphics.LoadTexture("C:/Users/Jordan/source/repos/marshall-jordan-a3-2d-game-project/assets/graphics/sword02.png");
-            sword3 = Graphics.LoadTexture("C:/Users/Jordan/source/repos/marshall-jordan-a3-2d-game-project/assets/graphics/sword03.png");
-            sword10 = Graphics.LoadTexture("C:/Users/Jordan/source/repos/marshall-jordan-a3-2d-game-project/assets/graphics/sword10.png");
-            back = Graphics.LoadTexture("C:/Users/Jordan/source/repos/marshall-jordan-a3-2d-game-project/assets/graphics/back.png");
+            sword = Graphics.LoadTexture("../../../../assets/graphics/sword01.png");
+            sword2 = Graphics.LoadTexture("../../../../assets/graphics/sword02.png");
+            sword3 = Graphics.LoadTexture("../../../../assets/graphics/sword03.png");
+            sword10 = Graphics.LoadTexture("../../../../assets/graphics/sword10.png");
+            back = Graphics.LoadTexture("../../../../assets/graphics/back.png");
         }
 
         public void Update()
