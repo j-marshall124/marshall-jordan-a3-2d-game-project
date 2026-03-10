@@ -21,20 +21,21 @@ namespace MohawkGame2D
             new Vector2(531, 670)];
     public Enemy()
         {
-
+            enemyPosition = Random.Vector2(Window.Size);
         }
         public Enemy(Vector2 enemySpawnPosition)
         {
+            
+        }
 
+        public void MoveEnemy()
+        {
+            enemyPosition += gravity * Time.DeltaTime;
         }
 
         public void EnemyLoad()
         {
-            for (int i = 0; i < enemySpawnPosition.Length; i++)
-            {
-                Graphics.Draw(enemy, enemySpawnPosition[i]);
-                enemyPosition += enemySpawnPosition[i] += gravity * Time.DeltaTime;
-            }
+            Graphics.Draw(enemy, enemyPosition);
         }
     }
 }

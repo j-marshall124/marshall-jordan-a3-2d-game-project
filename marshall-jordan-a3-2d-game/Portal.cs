@@ -5,7 +5,7 @@ using System.Text;
 
 namespace MohawkGame2D
 {
-    public class Portals
+    public class Portal
     {
         public Texture2D portal = Graphics.LoadTexture("C:/Users/lifew/source/repos/marshall-jordan-a3-2d-game/assets/graphics/portal.png");
         public Vector2[] portalPosition =
@@ -23,6 +23,11 @@ namespace MohawkGame2D
             {
                 Graphics.Draw(portal, portalPosition[i]);
             }
+        }
+
+        public void SpawnEnemy()
+        {
+
         }
     }
 }
