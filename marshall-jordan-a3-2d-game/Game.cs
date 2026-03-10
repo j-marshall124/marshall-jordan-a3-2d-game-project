@@ -1,6 +1,7 @@
 ﻿// Include the namespaces (code libraries) you need below.
 using System;
 using System.Numerics;
+using System.Xml.Serialization;
 
 // The namespace your code is in.
 namespace MohawkGame2D
@@ -10,9 +11,10 @@ namespace MohawkGame2D
         // Place your variables here:
         Player player = new Player();
         Portals portals = new Portals();
-        Enemies enemies = new Enemies();
+        Enemy enemy = new Enemy();
 
         Color bg = new Color(115, 128, 75);
+        bool isGameOver = false;
 
         public void Setup()
         {
@@ -23,11 +25,25 @@ namespace MohawkGame2D
 
         public void Update()
         {
+            Gameplay();
+        }
+        void Gameplay()
+        {
             Window.ClearBackground(bg);
 
             player.PlayerLoad();
             portals.PortalLoad();
-            enemies.EnemyLoad();
+            enemy.EnemyLoad();
+        }
+        void EndScreen()
+        {
+            Window.ClearBackground(Color.Yellow);
+            Text.Draw("YOU WIN!", 10, 10);
+
+            if (Input.IsKeyboardKeyPressed(KeyboardInput.Space))
+            {
+                Setup();
+            }
         }
     }
 

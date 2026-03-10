@@ -1,35 +1,49 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Numerics;
 using System.Text;
 
 namespace MohawkGame2D
 {
     public class Player
     {
-        public Texture2D playerFrame1;
-        public Texture2D playerFrame2;
-        public Texture2D playerHurt;
+        public Texture2D playerFrame1 = Graphics.LoadTexture("C:/Users/lifew/source/repos/marshall-jordan-a3-2d-game/assets/graphics/robot character1.png");
+        public Texture2D playerFrame2 = Graphics.LoadTexture("C:/Users/lifew/source/repos/marshall-jordan-a3-2d-game/assets/graphics/robot character2.png");
+        public Texture2D playerHurt = Graphics.LoadTexture("C:/Users/lifew/source/repos/marshall-jordan-a3-2d-game/assets/graphics/robot character hurt1.png");
 
         public void PlayerLoad()
         {
-            playerFrame1 = Graphics.LoadTexture("C:/Users/lifew/source/repos/marshall-jordan-a3-2d-game/assets/graphics/robot character1.png");
-            playerFrame2 = Graphics.LoadTexture("C:/Users/lifew/source/repos/marshall-jordan-a3-2d-game/assets/graphics/robot character2.png");
-            playerHurt = Graphics.LoadTexture("C:/Users/lifew/source/repos/marshall-jordan-a3-2d-game/assets/graphics/robot character hurt1.png");
             float mouseX = Input.GetMouseX() - 28;
             float mouseY = Input.GetMouseY() - 44;
+            float playerLeft = Input.GetMouseX() + 28;
+            float playerRight = Input.GetMouseX() - 56;
+            float playerTop = Input.GetMouseY() - 44;
+            float playerBottom = Input.GetMouseY() - 88;
 
-            if (Input.IsMouseButtonDown(0))
+            // Constrains play to the play space
+            if (playerLeft < 56)
             {
-                Graphics.Draw(playerFrame2, mouseX, mouseY);
+                mouseX = 0;
             }
-            else if (mouseX >= 243 && mouseX <= 308 && mouseY >= 610 && mouseY <= 670)
+            if (playerTop < 0)
             {
-                Graphics.Draw(playerHurt, mouseX, mouseY);
+                mouseY = 0;
             }
-            else
+            if (playerRight > 518)
             {
-                Graphics.Draw(playerFrame1, mouseX, mouseY);
+                mouseX = 546;
             }
+            if (playerBottom > 562)
+            {
+                mouseY = 606;
+            }
+
+            Graphics.Draw(playerFrame1, mouseX, mouseY);
+        }
+
+        public void CollideWithEnemy(Enemy[] enemy, int count)
+        {
+
         }
     }
 }
