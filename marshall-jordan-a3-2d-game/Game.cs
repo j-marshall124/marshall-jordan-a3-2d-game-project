@@ -32,8 +32,8 @@ namespace MohawkGame2D
         public void Update()
         {            
             Gameplay();
-            Text.Draw($"Lives: ", 4, 763);
-            Text.Draw($"Score: ", 250, 763);
+            Text.Draw($"Lives: {playerLives}", 4, 763);
+            Text.Draw($"Score: {score}", 250, 763);
         }
         void Gameplay()
         {
@@ -43,7 +43,7 @@ namespace MohawkGame2D
             portals.PortalLoad();
             if (Input.IsKeyboardKeyPressed(KeyboardInput.A))
             {
-                if (enemies.Length < 100)
+                if (enemies.Length < 51)
                     enemies[count] = new Enemy();
                 count++;
                 if (count > enemies.Length)
@@ -58,6 +58,11 @@ namespace MohawkGame2D
                 Enemy enemy = enemies[i];
                 enemy.EnemyLoad();
                 enemy.MoveEnemy();
+                if (enemy.enemyPosition.Y < -100)
+                {
+                    score += 5;
+                    enemy.enemyPosition.Y = 870;
+                }
             }
 
             // If enemy crosses top of screen, score increases

@@ -21,7 +21,7 @@ namespace MohawkGame2D
             new Vector2(531, 670)];
     public Enemy()
         {
-            enemyPosition = Random.Vector2(Window.Size);
+            enemyPosition = Random.Vector2(15, 531, 670, 670);
         }
         public Enemy(Vector2 enemySpawnPosition)
         {
@@ -36,6 +36,10 @@ namespace MohawkGame2D
         public void EnemyLoad()
         {
             Graphics.Draw(enemy, enemyPosition);
+        }
+        public void EnemyUnload()
+        {
+            Graphics.UnloadTexture(enemy);
         }
     }
 }
