@@ -2,23 +2,23 @@
 using System.Collections.Generic;
 using System.Numerics;
 using System.Text;
+using System.Threading;
 
 namespace MohawkGame2D
 {
     public class Player
     {
-        public Texture2D playerFrame1 = Graphics.LoadTexture("C:/Users/lifew/source/repos/marshall-jordan-a3-2d-game/assets/graphics/robot character1.png");
-        public Texture2D playerFrame2 = Graphics.LoadTexture("C:/Users/lifew/source/repos/marshall-jordan-a3-2d-game/assets/graphics/robot character2.png");
-        public Texture2D playerHurt = Graphics.LoadTexture("C:/Users/lifew/source/repos/marshall-jordan-a3-2d-game/assets/graphics/robot character hurt1.png");
-
+        public Texture2D playerFrame1 = Graphics.LoadTexture("../../../../assets/graphics/robot character1.png");
+        public Texture2D playerFrame2 = Graphics.LoadTexture("../../../../assets/graphics/robot character2.png");
+        public Texture2D playerHurt = Graphics.LoadTexture("../../../../assets/graphics/robot character hurt1.png");
         public void PlayerLoad()
         {
-            float mouseX = Input.GetMouseX() - 28;
-            float mouseY = Input.GetMouseY() - 44;
-            float playerLeft = Input.GetMouseX() + 28;
-            float playerRight = Input.GetMouseX() - 56;
-            float playerTop = Input.GetMouseY() - 44;
-            float playerBottom = Input.GetMouseY() - 88;
+        float mouseX = Input.GetMouseX() - 28;
+        float mouseY = Input.GetMouseY() - 44;
+        float playerLeft = Input.GetMouseX() + 28;
+        float playerRight = Input.GetMouseX() - 56;
+        float playerTop = Input.GetMouseY() - 44;
+        float playerBottom = Input.GetMouseY() - 88;
 
             // Constrains play to the play space
             if (playerLeft < 56)
@@ -39,11 +39,6 @@ namespace MohawkGame2D
             }
 
             Graphics.Draw(playerFrame1, mouseX, mouseY);
-        }
-
-        public void CollideWithEnemy(Enemy[] enemy, int count)
-        {
-
         }
     }
 }

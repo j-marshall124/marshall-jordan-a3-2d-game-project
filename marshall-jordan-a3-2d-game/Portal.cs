@@ -7,7 +7,7 @@ namespace MohawkGame2D
 {
     public class Portal
     {
-        public Texture2D portal = Graphics.LoadTexture("C:/Users/lifew/source/repos/marshall-jordan-a3-2d-game/assets/graphics/portal.png");
+        public Texture2D portal = Graphics.LoadTexture("../../../../assets/graphics/portal.png");
         public Vector2[] portalPosition =
            [new Vector2(4, 702),
             new Vector2(90, 702),
