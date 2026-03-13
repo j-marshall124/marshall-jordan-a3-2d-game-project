@@ -38,7 +38,7 @@ namespace MohawkGame2D
                 mouseY = 606;
             }
 
-            Graphics.Draw(playerFrame1, mouseX, mouseY);
+            Graphics.Draw(playerFrame1, mouseX, mouseY); // Draws player graphic to the mouse cursor
         }
     }
 }
