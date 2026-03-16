@@ -19,8 +19,6 @@ namespace MohawkGame2D
             new Vector2(445, 670),
             new Vector2(531, 670)];
 
-
-
         public Enemy()
         {
             int randIndex = Random.Integer(0, 7);
@@ -32,13 +30,15 @@ namespace MohawkGame2D
             enemyPosition += gravity * Time.DeltaTime;
         }
 
+        public void EnemyRespwn()
+        {
+            int randRespawnIndex = Random.Integer(0, 7);
+            enemyPosition = enemySpawnPosition[randRespawnIndex];
+        }
+
         public void EnemyLoad()
         {
             Graphics.Draw(enemy, enemyPosition);
-            //float enemyLeft = enemyPosition.X;
-            //float enemyRight = enemyPosition.X;
-            //float enemyTop = enemyPosition.Y;
-            //float enemyBottom = enemyPosition.Y;
         }
     }
 }

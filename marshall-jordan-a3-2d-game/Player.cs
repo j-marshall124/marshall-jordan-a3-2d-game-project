@@ -13,12 +13,13 @@ namespace MohawkGame2D
         public Texture2D playerHurt = Graphics.LoadTexture("../../../../assets/graphics/robot character hurt1.png");
         public void PlayerLoad()
         {
-        float mouseX = Input.GetMouseX() - 28;
-        float mouseY = Input.GetMouseY() - 44;
-        float playerLeft = Input.GetMouseX() + 28;
-        float playerRight = Input.GetMouseX() - 56;
-        float playerTop = Input.GetMouseY() - 44;
-        float playerBottom = Input.GetMouseY() - 88;
+            float mouseX = Input.GetMouseX() - 28;
+            float mouseY = Input.GetMouseY() - 44;
+            float playerLeft = Input.GetMouseX() + 28;
+            float playerRight = Input.GetMouseX() - 56;
+            float playerTop = Input.GetMouseY() - 44;
+            float playerBottom = Input.GetMouseY() - 88;
+            Vector2 playerPosition = new Vector2(mouseX, mouseY);
 
             // Constrains play to the play space
             if (playerLeft < 56)

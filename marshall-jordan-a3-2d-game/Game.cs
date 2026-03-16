@@ -13,15 +13,14 @@ namespace MohawkGame2D
         // Place your variables here:
         Player player = new Player();
         Portal portals = new Portal();
-        Enemy[] enemies = new Enemy[50];
+        Enemy[] enemies = new Enemy[200];
         Texture2D logo = Graphics.LoadTexture("../../../../assets/graphics/game logo.png");
 
         int playerLives = 3;
         int score = 0;
         int count = 0;
 
-        float randomSpawnTime = Random.Float(0, 10); // Random time between 0 and 10 seconds
-        float spawnTimer = Time.SecondsElapsed;
+        float randomSpawnTime = Random.Float(0, 7); // Random time between 0 and 7 seconds
 
         Color bg = new Color(115, 128, 75);
         bool showStart = true;
@@ -53,15 +52,15 @@ namespace MohawkGame2D
             else
             {
                 Gameplay();
+                float timer = Time.SecondsElapsed;
                 Text.Draw($"Lives: {playerLives}", 4, 763);
-                Text.Draw($"Score: {score}", 250, 763);
+                Text.Draw($"Score: {score}", 150, 763);
+                Text.Draw($"Time: {timer}", 350, 763);
             }
-
         }
         void Gameplay()
         {
             Window.ClearBackground(bg);
-
 
             player.PlayerLoad();
             portals.PortalLoad();
@@ -87,18 +86,24 @@ namespace MohawkGame2D
                 if (enemy.enemyPosition.Y < -100) // If enemy is off the top of the screen
                 {
                     score += 5; // increase score
+                    enemy.EnemyRespwn();
+                }
 
-                    enemy.enemyPosition.Y = 670; // move the enemy to the spawn
-                    //enemy.gravity *= 1.1f; // increases enemy speed
-
-                    if (score >= 100) // increases enemy max speed
-                    {
-                        enemy.gravity.Y = -250;
-                    }
-                    else if (score >= 200)
-                    {
-                        enemy.gravity.Y = -300;
-                    }
+                if (score >= 100) // increases enemy max speed
+                {
+                    enemy.gravity.Y = -250;
+                }
+                else if (score >= 200)
+                {
+                    enemy.gravity.Y = -300;
+                }
+                else if (score >= 300)
+                {
+                    enemy.gravity.Y = -350;
+                }
+                else if (score >= 400)
+                {
+                    enemy.gravity.Y = -400;
                 }
             }
         }
