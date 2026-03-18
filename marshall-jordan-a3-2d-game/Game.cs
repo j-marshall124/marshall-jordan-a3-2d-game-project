@@ -13,7 +13,7 @@ namespace MohawkGame2D
         // Place your variables here:
         Player player = new Player();
         Portal portals = new Portal();
-        Enemy[] enemies = new Enemy[200];
+        Enemy[] enemies = new Enemy[14];
         Texture2D logo = Graphics.LoadTexture("../../../../assets/graphics/game logo.png");
 
         int playerLives = 3;
@@ -52,10 +52,8 @@ namespace MohawkGame2D
             else
             {
                 Gameplay();
-                float timer = Time.SecondsElapsed;
                 Text.Draw($"Lives: {playerLives}", 4, 763);
-                Text.Draw($"Score: {score}", 150, 763);
-                Text.Draw($"Time: {timer}", 350, 763);
+                Text.Draw($"Score: {score}", 250, 763);
             }
         }
         void Gameplay()
@@ -65,7 +63,7 @@ namespace MohawkGame2D
             player.PlayerLoad();
             portals.PortalLoad();
 
-            if (Time.SecondsElapsed > randomSpawnTime) // spawns enemies
+            if (Time.SecondsElapsed > randomSpawnTime && count < enemies.Length) // spawns enemies
             {
                 enemies[count] = new Enemy();
                 count++;
@@ -105,6 +103,16 @@ namespace MohawkGame2D
                 {
                     enemy.gravity.Y = -400;
                 }
+
+                foreach (Enemy e in enemies)
+                {
+                    float distance = (e.enemyPosition - player.playerPosition).Length();
+                    float collisionDistance = e.collisionRadius + player.collisionRadius;
+                    if (distance < collisionDistance)
+                    {
+                        playerLives -= 1;
+                    }
+                }
             }
         }
 
@@ -117,15 +125,18 @@ namespace MohawkGame2D
             {
                 showStart = false;
             }
-
         }
+
         void EndScreen()
         {
-            Window.ClearBackground(Color.Yellow);
-            Text.Draw("YOU WIN!", 10, 10);
+            Window.ClearBackground(bg);
+            Text.Draw("GAME OVER!", 200, 300);
+            Text.Draw($"Your Score: {score}", 170, 350);
+            Text.Draw("Click anywhere to play again", 50, 400);
 
-            if (Input.IsKeyboardKeyPressed(KeyboardInput.Space))
+            if (Input.IsMouseButtonDown(0))
             {
+                isGameOver = false;
                 Setup();
             }
         }

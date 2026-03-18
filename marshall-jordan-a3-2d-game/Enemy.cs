@@ -18,6 +18,7 @@ namespace MohawkGame2D
             new Vector2(359, 670),
             new Vector2(445, 670),
             new Vector2(531, 670)];
+        public float collisionRadius = 40;
 
         public Enemy()
         {

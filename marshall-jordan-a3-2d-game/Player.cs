@@ -11,35 +11,47 @@ namespace MohawkGame2D
         public Texture2D playerFrame1 = Graphics.LoadTexture("../../../../assets/graphics/robot character1.png");
         public Texture2D playerFrame2 = Graphics.LoadTexture("../../../../assets/graphics/robot character2.png");
         public Texture2D playerHurt = Graphics.LoadTexture("../../../../assets/graphics/robot character hurt1.png");
+        public float mouseX;
+        public float mouseY;
+        public Vector2 playerPosition;
+        public float collisionRadius = 40;
+
+        public Player()
+        {
+            mouseX = Input.GetMouseX() - 28;
+            mouseY = Input.GetMouseY() - 44;
+            playerPosition = new Vector2(mouseX, mouseY);
+        }
         public void PlayerLoad()
         {
             float mouseX = Input.GetMouseX() - 28;
             float mouseY = Input.GetMouseY() - 44;
-            float playerLeft = Input.GetMouseX() + 28;
-            float playerRight = Input.GetMouseX() - 56;
-            float playerTop = Input.GetMouseY() - 44;
-            float playerBottom = Input.GetMouseY() - 88;
-            Vector2 playerPosition = new Vector2(mouseX, mouseY);
+            playerPosition = new Vector2(mouseX, mouseY);
+
+            float playerLeft = playerPosition.X + 28;
+            float playerRight = playerPosition.X - 56;
+            float playerTop = playerPosition.Y - 44;
+            float playerBottom = playerPosition.Y - 88;
 
             // Constrains play to the play space
-            if (playerLeft < 56)
+            if (playerLeft < 28)
             {
-                mouseX = 0;
+                playerPosition.X = 0;
             }
-            if (playerTop < 0)
+            if (playerTop < -44)
             {
-                mouseY = 0;
+                playerPosition.Y = 0;
             }
-            if (playerRight > 518)
+            if (playerRight > 487)
             {
-                mouseX = 546;
+                playerPosition.X = 546;
             }
-            if (playerBottom > 562)
+            if (playerBottom > 520)
             {
-                mouseY = 606;
+                playerPosition.Y = 606;
             }
 
-            Graphics.Draw(playerFrame1, mouseX, mouseY); // Draws player graphic to the mouse cursor
+            Graphics.Draw(playerFrame1, playerPosition); // Draws player graphic to the mouse cursor
         }
     }
 }
