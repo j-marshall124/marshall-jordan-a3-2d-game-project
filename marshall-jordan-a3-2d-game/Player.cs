@@ -14,7 +14,7 @@ namespace MohawkGame2D
         public float mouseX;
         public float mouseY;
         public Vector2 playerPosition;
-        public float collisionRadius = 40;
+        public float collisionRadius = 30;
 
         public Player()
         {

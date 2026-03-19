@@ -15,12 +15,17 @@ namespace MohawkGame2D
         Portal portals = new Portal();
         Enemy[] enemies = new Enemy[14];
         Texture2D logo = Graphics.LoadTexture("../../../../assets/graphics/game logo.png");
+        Sound hurt = Audio.LoadSound("../../../../assets/audio/hurt.ogg");
+        Sound portal = Audio.LoadSound("../../../../assets/audio/pop2.wav");
+        Music menu = Audio.LoadMusic("../../../../assets/audio/Stage Select.ogg");
+        Music level = Audio.LoadMusic("../../../../assets/audio/Stage 1.ogg");
+
 
         int playerLives = 3;
         int score = 0;
         int count = 0;
 
-        float randomSpawnTime = Random.Float(0, 7); // Random time between 0 and 7 seconds
+        float randomSpawnTime = Random.Float(0, 5); // Random time between 0 and 5 seconds
 
         Color bg = new Color(115, 128, 75);
         bool showStart = true;
@@ -32,6 +37,8 @@ namespace MohawkGame2D
             Window.SetSize(600, 800);
             Window.TargetFPS = 60;
             Time.SecondsElapsed = 0;
+            count = 0;
+            Audio.Play(level);
 
             for (int i = 0; i < enemies.Length; i++)
             {
@@ -42,7 +49,7 @@ namespace MohawkGame2D
         public void Update()
         {
             if (showStart == true)
-            {
+            {                
                 StartScreen();
             }
             else if (isGameOver == true)
@@ -58,7 +65,7 @@ namespace MohawkGame2D
         }
         void Gameplay()
         {
-            Window.ClearBackground(bg);
+            Window.ClearBackground(bg);            
 
             player.PlayerLoad();
             portals.PortalLoad();
@@ -67,6 +74,7 @@ namespace MohawkGame2D
             {
                 enemies[count] = new Enemy();
                 count++;
+                Audio.Play(portal);
                 Time.SecondsElapsed = 0;
             }
 
@@ -104,13 +112,20 @@ namespace MohawkGame2D
                     enemy.gravity.Y = -400;
                 }
 
-                foreach (Enemy e in enemies)
+                foreach (Enemy e in enemies) // checks collision for each enemy
                 {
                     float distance = (e.enemyPosition - player.playerPosition).Length();
                     float collisionDistance = e.collisionRadius + player.collisionRadius;
-                    if (distance < collisionDistance)
+                    if (distance < collisionDistance) // if player collides with an enemy
                     {
-                        playerLives -= 1;
+                        Graphics.Draw(player.playerHurt, player.playerPosition); // player hurt sprite
+                        Audio.Play(hurt);
+                        playerLives -= 1; // loses 1 life
+                        Setup(); // resets the scene
+                        if (playerLives <= 0) // game over
+                        {
+                            isGameOver = true;
+                        }
                     }
                 }
             }
@@ -120,7 +135,8 @@ namespace MohawkGame2D
         {
             Window.ClearBackground(bg);
             Graphics.Draw(logo, 67, 200);
-            Text.Draw("Click anywhere to start", 100, 500);
+            Text.Draw("Click anywhere to start", 100, 500);            
+
             if (Input.IsMouseButtonDown(0))
             {
                 showStart = false;
@@ -132,11 +148,14 @@ namespace MohawkGame2D
             Window.ClearBackground(bg);
             Text.Draw("GAME OVER!", 200, 300);
             Text.Draw($"Your Score: {score}", 170, 350);
-            Text.Draw("Click anywhere to play again", 50, 400);
+            Text.Draw("Click anywhere to play again", 50, 400);            
 
             if (Input.IsMouseButtonDown(0))
             {
                 isGameOver = false;
+                playerLives = 3;
+                score = 0;
+                Audio.Stop(level);
                 Setup();
             }
         }
