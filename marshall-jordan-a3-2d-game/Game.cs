@@ -15,10 +15,12 @@ namespace MohawkGame2D
         Portal portals = new Portal();
         Enemy[] enemies = new Enemy[14];
         Texture2D logo = Graphics.LoadTexture("../../../../assets/graphics/game logo.png");
+        Texture2D bg = Graphics.LoadTexture("../../../../assets/graphics/bg.png");
         Sound hurt = Audio.LoadSound("../../../../assets/audio/hurt.ogg");
         Sound portal = Audio.LoadSound("../../../../assets/audio/pop2.wav");
         Music menu = Audio.LoadMusic("../../../../assets/audio/Stage Select.ogg");
         Music level = Audio.LoadMusic("../../../../assets/audio/Stage 1.ogg");
+        Font text = Text.LoadFont("../../../../assets/fonts/game font.ttf");
 
 
         int playerLives = 3;
@@ -27,7 +29,7 @@ namespace MohawkGame2D
 
         float randomSpawnTime = Random.Float(0, 5); // Random time between 0 and 5 seconds
 
-        Color bg = new Color(115, 128, 75);
+        Color green = new Color(115, 128, 75);
         bool showStart = true;
         bool isGameOver = false;
 
@@ -59,13 +61,14 @@ namespace MohawkGame2D
             else
             {
                 Gameplay();
-                Text.Draw($"Lives: {playerLives}", 4, 763);
-                Text.Draw($"Score: {score}", 250, 763);
+                Text.Draw($"Lives: {playerLives}", 5, 760, text);
+                Text.Draw($"Score: {score}", 250, 760, text);
             }
         }
         void Gameplay()
         {
-            Window.ClearBackground(bg);            
+            Window.ClearBackground(green);
+            Graphics.Draw(bg, 0, 0);
 
             player.PlayerLoad();
             portals.PortalLoad();
@@ -133,9 +136,9 @@ namespace MohawkGame2D
 
         void StartScreen()
         {
-            Window.ClearBackground(bg);
+            Window.ClearBackground(green);
             Graphics.Draw(logo, 67, 200);
-            Text.Draw("Click anywhere to start", 100, 500);            
+            Text.Draw("Click anywhere to start", 125, 500, text);            
 
             if (Input.IsMouseButtonDown(0))
             {
@@ -145,10 +148,10 @@ namespace MohawkGame2D
 
         void EndScreen()
         {
-            Window.ClearBackground(bg);
-            Text.Draw("GAME OVER!", 200, 300);
-            Text.Draw($"Your Score: {score}", 170, 350);
-            Text.Draw("Click anywhere to play again", 50, 400);            
+            Window.ClearBackground(green);
+            Text.Draw("GAME OVER!", 225, 300, text);
+            Text.Draw($"Your Score: {score}", 195, 350, text);
+            Text.Draw("Click anywhere to play again", 80, 400, text);            
 
             if (Input.IsMouseButtonDown(0))
             {
